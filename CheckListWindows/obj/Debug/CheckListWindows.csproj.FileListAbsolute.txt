@@ -1,10 +1,11 @@
-C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\CheckListWindows.exe
-C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\CheckListWindows.pdb
-C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.csproj.AssemblyReference.cache
+C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.Home.resources
 C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.Properties.Resources.resources
 C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.csproj.GenerateResource.cache
 C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.csproj.CoreCompileInputs.cache
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\CheckListWindows.exe
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\CheckListWindows.pdb
 C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.exe
 C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.pdb
-C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.Home.resources
-C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.Login.resources
+C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.csproj.AssemblyReference.cache
+C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.Forms.UserSettingsForm.resources
+C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.Forms.ShareForm.resources

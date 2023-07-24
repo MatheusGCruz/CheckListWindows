@@ -41,29 +41,50 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiInterface\AuthApiInterface.cs" />
-    <Compile Include="config.cs" />
-    <Compile Include="Home.cs">
+    <Compile Include="ApiInterface\ChecklistApiInterface.cs" />
+    <Compile Include="ApiInterface\NewItemsInterface.cs" />
+    <Compile Include="Auxiliary\ColorsStyles.cs" />
+    <Compile Include="Auxiliary\FontsEdits.cs" />
+    <Compile Include="Auxiliary\Symbols.cs" />
+    <Compile Include="Auxiliary\TextEditions.cs" />
+    <Compile Include="Configs\auxiliaryConfigs.cs" />
+    <Compile Include="Configs\config.cs" />
+    <Compile Include="Forms\Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Home.Designer.cs">
+    <Compile Include="Forms\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="Forms\ShareForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="Forms\ShareForm.Designer.cs">
+      <DependentUpon>ShareForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="models\AuthUserDto.cs" />
-    <Compile Include="models\ChecklistTokenDto.cs" />
-    <Compile Include="models\UserInviteDto.cs" />
+    <Compile Include="Forms\UserSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserSettingsForm.Designer.cs">
+      <DependentUpon>UserSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuthUserDto.cs" />
+    <Compile Include="Models\CheckedItemDto.cs" />
+    <Compile Include="Models\ChecklistItemDto.cs" />
+    <Compile Include="Models\ChecklistNameDto.cs" />
+    <Compile Include="Models\ChecklistTokenDto.cs" />
+    <Compile Include="Models\ShowChecklistItemDto.cs" />
+    <Compile Include="Models\ShowChecklistNameDto.cs" />
+    <Compile Include="Models\UserInviteDto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Home.resx">
+    <EmbeddedResource Include="Forms\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ShareForm.resx">
+      <DependentUpon>ShareForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserSettingsForm.resx">
+      <DependentUpon>UserSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -73,6 +94,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -84,6 +106,16 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\confirm.png" />
+    <None Include="Resources\share.png" />
+    <None Include="Resources\wrench.png" />
+    <None Include="Resources\wifi-white.png" />
+    <None Include="Resources\wifi-blue.png" />
+    <None Include="Resources\pin-red.png" />
+    <None Include="Resources\pin-white.png" />
+    <Content Include="Resources\post-it.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

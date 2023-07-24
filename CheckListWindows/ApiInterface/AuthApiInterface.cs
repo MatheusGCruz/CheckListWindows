@@ -9,8 +9,8 @@ namespace CheckListWindows.apiInterface
     {
         public static String createUser(String pinCode, AuthUserDto newUser)
         {
-
             return "Placeholder - User generated";
         }
+
     }
 }
