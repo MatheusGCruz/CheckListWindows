@@ -9,3 +9,7 @@ C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWind
 C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.csproj.AssemblyReference.cache
 C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.Forms.UserSettingsForm.resources
 C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.Forms.ShareForm.resources
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\CheckListWindows.exe.config
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.csproj.CopyComplete

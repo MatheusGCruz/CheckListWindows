@@ -1,4 +1,5 @@
-﻿using CheckListWindows.ApiInterface;
+﻿using CheckListWindows.apiInterface;
+using CheckListWindows.ApiInterface;
 using CheckListWindows.Auxiliary;
 using CheckListWindows.Configs;
 using CheckListWindows.Forms;
@@ -7,6 +8,7 @@ using CheckListWindows.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -22,6 +24,7 @@ namespace CheckListWindows
         bool isCreatingNewList = false;
         bool isCreatingNewItem = false;
         bool isUserConnected = false;
+        bool isUserValid = false;
         private bool isFormPined = false;
 
         private Point _mouseLoc;
@@ -37,6 +40,8 @@ namespace CheckListWindows
             //initiateImages();
             setBasicConfigs();
             fillItens(true);
+            setBasicUserConfigs();       
+            
         }
 
         private void setBasicConfigs()
@@ -49,6 +54,20 @@ namespace CheckListWindows
             titlePanel.ForeColor = auxiliaryConfigs.getLighterTextColor();
             titlePanel.BorderStyle = BorderStyle.FixedSingle;
 
+        }
+
+        private void setBasicUserConfigs()
+        {
+            if (!isUserConnected)
+            {
+                if (!AuthApiInterface.isUserInserted())
+                {
+                    showSettingsForm();
+                }
+                connStatus();
+
+            }
+            
         }
 
         private void generateLists(ShowChecklistNameDto list, int pointY)
@@ -304,34 +323,49 @@ namespace CheckListWindows
 
         private void connStatus()
         {
-            if (isUserConnected)
+            AuthApiInterface.getChecklistToken();
+
+            if (ConfigurationManager.AppSettings.Get("checklistToken") == "NONE")
             {
-                connPictBox.BackgroundImage = Properties.Resources.wifi_blue;
+                connPictBox.BackgroundImage = Properties.Resources.wifi_white;
             }
             else
             {
-                connPictBox.BackgroundImage = Properties.Resources.wifi_white;
+                connPictBox.BackgroundImage = Properties.Resources.wifi_blue;
             }
 
         }
 
         private void refreshConnection(object sender, EventArgs e)
         {
-            isUserConnected = !isUserConnected;
             connStatus();
         }
 
         private void settingsBtn_Click(object sender, EventArgs e)
         {
-            UserSettingsForm userSettingsForm = new UserSettingsForm();
-            userSettingsForm.Show();
+            showSettingsForm();
         }
 
         private void shareClick(object sender, EventArgs e)
         {
+            showShareForm();
+        }
+
+
+        // Open forms
+
+        private void showSettingsForm()
+        {
+            UserSettingsForm userSettingsForm = new UserSettingsForm();
+            userSettingsForm.Show();
+        }
+
+        private void showShareForm()
+        {
             ShareForm shareForm = new ShareForm();
             shareForm.Show();
         }
+
     }
 
 }

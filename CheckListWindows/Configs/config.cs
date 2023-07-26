@@ -6,7 +6,7 @@ namespace CheckListWindows
 {
     class config
     {
-        public String authApiUrl = "";
-        public String checklistApiUrl = "";
+        public static String authApiUrl = "http://localhost:8080";
+        public static String checklistApiUrl = "http://localhost:8081";
     }
 }

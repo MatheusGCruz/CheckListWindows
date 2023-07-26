@@ -2,17 +2,26 @@
 using CheckListWindows.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CheckListWindows.ApiInterface
 {
     class ChecklistApiInterface
     {
+
+        
+
         public static List<ShowChecklistNameDto> getListNames()
         {
             List<ShowChecklistNameDto> listNames = new List<ShowChecklistNameDto>();
 
-            for(int i = 1; i <= 5; i++)
+
+
+            for (int i = 1; i <= 5; i++)
             {
                 ShowChecklistNameDto mockShowList = new ShowChecklistNameDto();
                 ChecklistNameDto mockListName = new ChecklistNameDto();
@@ -85,5 +94,11 @@ namespace CheckListWindows.ApiInterface
 
             return listNames;
         }
+
+
+
+
+
+
     }
 }

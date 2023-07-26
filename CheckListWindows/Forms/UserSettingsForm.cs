@@ -1,8 +1,12 @@
-﻿using CheckListWindows.Auxiliary;
+﻿using CheckListWindows.apiInterface;
+using CheckListWindows.ApiInterface;
+using CheckListWindows.Auxiliary;
 using CheckListWindows.Configs;
+using CheckListWindows.models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -13,6 +17,7 @@ namespace CheckListWindows.Forms
     public partial class UserSettingsForm : Form
     {
         private bool isNewUser = false;
+        private bool isUserLogged = false;
 
         public UserSettingsForm()
         {
@@ -22,7 +27,10 @@ namespace CheckListWindows.Forms
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-
+            if (isNewUser)
+            {
+                createNewUser();
+            }
         }
 
         private void registerBtn_Click(object sender, EventArgs e)
@@ -46,7 +54,11 @@ namespace CheckListWindows.Forms
 
         private void confirmBtnClick(object sender, EventArgs e)
         {
-            this.Close();
+            if (saveConfigs())
+            {
+                this.Close();
+            }
+
         }
 
         private void cancelBtnClick(object sender, EventArgs e)
@@ -107,6 +119,58 @@ namespace CheckListWindows.Forms
             }
 
         }
+
+        private bool saveConfigs()
+        {
+            try
+            {
+                SaveConfigInterface.AddOrUpdateAppSettings("username", usernameTxtBox.Text);
+                SaveConfigInterface.AddOrUpdateAppSettings("password", passwordTxtBox.Text);
+                return executeLogin();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return false;
+        }
+
+        private bool executeLogin()
+        {
+            SaveConfigInterface.AddOrUpdateAppSettings("checklistToken", "NONE");
+            AuthApiInterface.getChecklistToken();
+            string teste = ConfigurationManager.AppSettings.Get("checklistToken");
+            return !(ConfigurationManager.AppSettings.Get("checklistToken") == "NONE");
+        }
+
+        private bool createNewUser()
+        {
+            if(passwordTxtBox.Text != confirmTxtBox.Text)
+            {
+                msgLbl.Text = "Password and Confirmation dosn't match.";
+                return false;
+            }
+            else if(inviteTxtBox.Text == "")
+            {
+                msgLbl.Text = "Invite cannot be null";
+                return false;
+            }
+            else
+            {
+                AuthUserDto newUser = new AuthUserDto();
+                newUser.username = usernameTxtBox.Text;
+                newUser.password = passwordTxtBox.Text;
+                msgLbl.Text = AuthApiInterface.createUser(inviteTxtBox.Text, newUser);
+
+                return executeLogin();
+            }
+
+
+
+            return false;
+        }
+
+
 
 
 
