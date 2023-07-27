@@ -7,6 +7,7 @@ namespace CheckListWindows.Configs
 {
     class auxiliaryConfigs
     {
+
         public static Color getBackGroundColor()
         {
             return Color.AliceBlue;

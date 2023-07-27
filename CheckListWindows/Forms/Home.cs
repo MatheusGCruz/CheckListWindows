@@ -26,10 +26,24 @@ namespace CheckListWindows
         bool isUserConnected = false;
         bool isUserValid = false;
         private bool isFormPined = false;
+        private int activeListId = 0;
 
         private Point _mouseLoc;
+
+        private static String shadownTimerValue = ConfigurationManager.AppSettings.Get("shadownTimerValue");
+        private static String refreshTimerValue = ConfigurationManager.AppSettings.Get("refreshTimerValue");
+
+        //Active itens - itens that is showed to user
         List<ShowChecklistNameDto> listNames = new List<ShowChecklistNameDto>();
         List<ShowChecklistItemDto> activeItensList = new List<ShowChecklistItemDto>();
+        List<ShowChecklistItemDto> allItemsList = new List<ShowChecklistItemDto>();
+
+        //ShadownItens - Itens that generates a shadow (background items)
+        List<ShowChecklistNameDto> shadowListNames = new List<ShowChecklistNameDto>();
+        List<ShowChecklistItemDto> shadowActiveItensList = new List<ShowChecklistItemDto>();
+        List<ShowChecklistItemDto> shadowAllItemsList = new List<ShowChecklistItemDto>();
+
+
 
         public Home()
         {
@@ -65,9 +79,34 @@ namespace CheckListWindows
                     showSettingsForm();
                 }
                 connStatus();
+            }
+
+            setTimers();
+
+
+
+        }
+
+        private void setTimers()
+        {
+            try
+            {
+                int shadowRefreshPeriod = Int32.Parse(shadownTimerValue);
+                int listRefreshPeriod = Int32.Parse(refreshTimerValue);
+
+
+                shadowRefreshTimer.Interval = (shadowRefreshPeriod * 1000); // 45 mins
+                shadowRefreshTimer.Start();
+
+                listRefreshTimer.Interval = (listRefreshPeriod * 1000); // 45 mins
+                listRefreshTimer.Start();
+            }
+            catch(Exception ex)
+            {
 
             }
-            
+
+
         }
 
         private void generateLists(ShowChecklistNameDto list, int pointY)
@@ -98,8 +137,70 @@ namespace CheckListWindows
                 LB.Click += new EventHandler(listItemClick); //assign click handler
                 listItensPanel.Controls.Add(LB);
             }
-
         }
+
+        private void refreshCache()
+        {
+            shadowListNames = new List<ShowChecklistNameDto>();
+            shadowAllItemsList = new List<ShowChecklistItemDto>();
+
+
+            shadowListNames = ChecklistApiInterface.getListNames();
+
+            foreach(ShowChecklistNameDto listName in shadowListNames)
+            {
+                List<ShowChecklistItemDto> itemsByList = new List<ShowChecklistItemDto>();
+                shadowAllItemsList.AddRange( ChecklistApiInterface.getListItens(listName.checklist.id));
+            }
+
+            shadowListNames.Add(NewItemsInterface.addChecklistNameDto());
+
+
+            foreach (ShowChecklistNameDto listName in shadowListNames)
+            {
+                int itensQuantity = 0;
+                foreach(ShowChecklistItemDto showChecklistItemDto in shadowAllItemsList)
+                {
+                    if(showChecklistItemDto.checkItem.checklistId == listName.checklist.id)
+                    {
+                        itensQuantity++;
+                    }
+                }
+                listName.numItens = itensQuantity;
+                listName.chkItens = itensQuantity - 1;
+            }
+
+
+            applyShadows();
+        }
+
+        private void applyShadows()
+        {
+            shadowActiveItensList = new List<ShowChecklistItemDto>();
+            foreach(ShowChecklistNameDto shadowListName in shadowListNames)
+            {
+                if(shadowListName.checklist.id == activeListId && activeListId>0 )
+                {
+                    shadowListName.isActive = true;
+                    foreach(ShowChecklistItemDto itemDto in shadowAllItemsList)
+                    {
+                        if(itemDto.checkItem.checklistId == activeListId)
+                        {
+                            shadowActiveItensList.Add(itemDto);
+                        }
+                    }
+                }
+            }
+
+            listNames = new List<ShowChecklistNameDto>();
+            activeItensList = new List<ShowChecklistItemDto>();
+            allItemsList = new List<ShowChecklistItemDto>();
+
+            listNames.AddRange(shadowListNames);
+            activeItensList.AddRange(shadowActiveItensList);
+            allItemsList.AddRange(shadowAllItemsList);
+        }
+
 
 
 
@@ -118,6 +219,13 @@ namespace CheckListWindows
                     if(lbl.Name == "list-" + list.checklist.id)
                     {
                         list.isActive = !list.isActive;
+                        if (list.isActive)
+                        {
+                            activeListId = list.checklist.id;
+                        }
+                        else {
+                            activeListId = 0;
+                        }
                     }
                     else
                     {
@@ -155,6 +263,26 @@ namespace CheckListWindows
             }
         }
 
+        protected void cancelItem(object sender, EventArgs e)
+        {
+            closeAndRefresh();
+        }
+
+        private List<ShowChecklistItemDto> addItensToActiveList(int listId)
+        {
+            List<ShowChecklistItemDto> activeItensByListId = new List<ShowChecklistItemDto>();
+
+            foreach(ShowChecklistItemDto showChecklistItemDto in allItemsList)
+            {
+                if(showChecklistItemDto.checkItem.checklistId == listId)
+                {
+                    activeItensByListId.Add(showChecklistItemDto);
+                } 
+            }
+            activeItensByListId.Add(NewItemsInterface.addChecklistItemDto());
+            return activeItensByListId;
+
+        }
 
         private void fillItens(bool refreshListNames)
         {
@@ -162,10 +290,8 @@ namespace CheckListWindows
             pointY = 1;
             if (refreshListNames)
             {
-                listNames = ChecklistApiInterface.getListNames();
-                listNames.Add(NewItemsInterface.addChecklistNameDto());
-            }
-            
+                refreshCache();
+            }            
 
             foreach (ShowChecklistNameDto list in listNames)
             {
@@ -174,8 +300,7 @@ namespace CheckListWindows
 
                 if(list.isActive)
                 {
-                    activeItensList = ChecklistApiInterface.getListItens(list.checklist.id);
-                    activeItensList.Add(NewItemsInterface.addChecklistItemDto());
+                    activeItensList = addItensToActiveList(list.checklist.id);
                     pointY++;
                     foreach (ShowChecklistItemDto item in activeItensList)
                     {
@@ -188,7 +313,6 @@ namespace CheckListWindows
                     }
                     pointY++;
                 }
-
             }
 
             if (isCreatingNewList)
@@ -220,18 +344,25 @@ namespace CheckListWindows
 
         private void createNewListTextbox()
         {
+            Label LBX = new Label();
+            LBX.Name = "cancelListCreation";
+            LBX.Location = new Point(pointX, (20 * pointY) + 5);
+            LBX.Size = new Size(20, 20);
+            LBX.Text = "x";
+            LBX.Click += new EventHandler(cancelItem); //assign click handler
+            listItensPanel.Controls.Add(LBX); 
+            
             Label LB = new Label();
-            LB.Name = "checkIcon";
-            LB.Location = new Point(pointX, (20 * pointY) + 5);
+            LB.Name = "confirmListCreation";
+            LB.Location = new Point(pointX + 20, (20 * pointY) + 5);
             LB.Size = new Size(20, 20);
             LB.Text = Symbols.getCheckMark();
-            LB.Click += new EventHandler(listItemClick); //assign click handler
+            LB.Click += new EventHandler(createNewList); //assign click handler
             listItensPanel.Controls.Add(LB);
-
 
             TextBox TX = new TextBox();
             TX.Name = "createdList";
-            TX.Location = new Point(pointX + 20, (20 * pointY) + 5);
+            TX.Location = new Point(pointX + 40, (20 * pointY) + 5);
             TX.Size = new Size(480, 13);
             TX.Text = "new list name";
             TX.Font = FontsEdits.newItemBoldFont(TX.Font);
@@ -244,19 +375,28 @@ namespace CheckListWindows
 
         private void createNewItemTextbox()
         {
+            Label LBX = new Label();
+            LBX.Name = "cancelItemCreation";
+            LBX.Location = new Point(pointX, (20 * pointY) + 5);
+            LBX.Size = new Size(20, 20);
+            LBX.Text = "X";
+            LBX.ForeColor = Color.Red;
+            LBX.Click += new EventHandler(cancelItem); //assign click handler
+            listItensPanel.Controls.Add(LBX); 
+            
             Label LB = new Label();
-            LB.Name = "checkIcon";
-            LB.Location = new Point(pointX, (20 * pointY) + 5);
+            LB.Name = "confirmItemCreation";
+            LB.Location = new Point(pointX+20, (20 * pointY) + 5);
             LB.Size = new Size(20, 20);
             LB.Text = Symbols.getCheckMark();
-            LB.Click += new EventHandler(listItemClick); //assign click handler
+            LBX.ForeColor = Color.Green;
+            LB.Click += new EventHandler(createNewItem); //assign click handler
             listItensPanel.Controls.Add(LB);
-
 
             TextBox TX = new TextBox();
             TX.Name = "createdItem";
-            TX.Location = new Point(pointX+20, (20 * pointY) + 5);
-            TX.Size = new Size(480, 13);
+            TX.Location = new Point(pointX+40, (20 * pointY) + 5);
+            TX.Size = new Size(460, 13);
             TX.Text = "new item name";
             TX.Font = FontsEdits.newItemBoldFont(TX.Font);
             TX.BorderStyle = BorderStyle.Fixed3D;
@@ -265,11 +405,6 @@ namespace CheckListWindows
             //TX.Click += new EventHandler(createNewItem()); //assign click handler
             listItensPanel.Controls.Add(TX);
 
-        }
-
-        private EventHandler createNewItem()
-        {
-            throw new NotImplementedException();
         }
 
         private void isNotCreating()
@@ -351,6 +486,13 @@ namespace CheckListWindows
             showShareForm();
         }
 
+        private void closeAndRefresh()
+        {
+            isCreatingNewItem = false;
+            isCreatingNewList = false;
+            fillItens(false);
+        }
+
 
         // Open forms
 
@@ -366,6 +508,48 @@ namespace CheckListWindows
             shareForm.Show();
         }
 
+        private void createNewList(object sender, EventArgs e)
+        {
+            ChecklistNameDto newList = new ChecklistNameDto();
+            newList.name = ((TextBox)listItensPanel.Controls["createdList"]).Text; // createdList.Text;
+            newList.isPermanent = 0;
+
+            if (ChecklistApiInterface.createNewList(newList))
+            {
+                fillItens(true);
+                closeAndRefresh();
+            }
+
+        }
+
+        private void createNewItem(object sender, EventArgs e)
+        {
+            CheckedItemDto newItem = new CheckedItemDto();
+            newItem.name = ((TextBox)listItensPanel.Controls["createdItem"]).Text; // createdList.Text;
+            newItem.isPermanent = 0;
+            newItem.checklistId = activeListId;
+
+            if (ChecklistApiInterface.createNewItem(newItem) && newItem.checklistId > 0)
+            {
+                fillItens(true);
+                closeAndRefresh();
+            }
+
+        }
+
+        private void listRefreshTimer_Tick(object sender, EventArgs e)
+        {
+            if(!isCreatingNewItem && !isCreatingNewList)
+            {
+                fillItens(false);
+            }
+            
+        }
+
+        private void shadowRefreshTimer_Tick(object sender, EventArgs e)
+        {
+            refreshCache();
+        }
     }
 
 }

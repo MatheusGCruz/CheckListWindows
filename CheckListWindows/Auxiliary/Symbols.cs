@@ -10,5 +10,10 @@ namespace CheckListWindows.Auxiliary
         {
             return ((char)0x2714).ToString();
         }
+
+        public static String getCloseMark()
+        {
+            return ((char)0x0158).ToString();
+        }
     }
 }

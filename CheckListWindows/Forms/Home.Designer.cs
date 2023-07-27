@@ -29,6 +29,7 @@ namespace CheckListWindows
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listItensPanel = new System.Windows.Forms.Panel();
             this.titlePanel = new System.Windows.Forms.Panel();
             this.connPictBox = new System.Windows.Forms.PictureBox();
@@ -36,6 +37,8 @@ namespace CheckListWindows
             this.subPanel = new System.Windows.Forms.Panel();
             this.sharePictBox = new System.Windows.Forms.PictureBox();
             this.settingsBtn = new System.Windows.Forms.PictureBox();
+            this.shadowRefreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.listRefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.titlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.connPictBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pinPictBox)).BeginInit();
@@ -118,6 +121,14 @@ namespace CheckListWindows
             this.settingsBtn.TabStop = false;
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             // 
+            // shadowRefreshTimer
+            // 
+            this.shadowRefreshTimer.Tick += new System.EventHandler(this.shadowRefreshTimer_Tick);
+            // 
+            // listRefreshTimer
+            // 
+            this.listRefreshTimer.Tick += new System.EventHandler(this.listRefreshTimer_Tick);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,6 +162,8 @@ namespace CheckListWindows
         private System.Windows.Forms.Panel subPanel;
         private System.Windows.Forms.PictureBox settingsBtn;
         private System.Windows.Forms.PictureBox sharePictBox;
+        private System.Windows.Forms.Timer shadowRefreshTimer;
+        private System.Windows.Forms.Timer listRefreshTimer;
     }
 }
 
