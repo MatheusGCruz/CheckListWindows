@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Text;
 
@@ -7,15 +8,16 @@ namespace CheckListWindows.Configs
 {
     class auxiliaryConfigs
     {
+        public static bool isConfigChanged { get; set; }
 
         public static Color getBackGroundColor()
         {
-            return Color.AliceBlue;
+            return ColorTranslator.FromHtml(ConfigurationManager.AppSettings.Get("backgroundColor")); //Color.AliceBlue;
         }
 
         public static Color getTextColorConfig()
         {
-            return Color.Black;
+            return ColorTranslator.FromHtml(ConfigurationManager.AppSettings.Get("textColor")); //Color.Black;
         }
 
 

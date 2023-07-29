@@ -19,6 +19,9 @@ namespace CheckListWindows.Forms
         private bool isNewUser = false;
         private bool isUserLogged = false;
 
+        private string textColor = ConfigurationManager.AppSettings.Get("textColor");
+        private string backgroundColor = ConfigurationManager.AppSettings.Get("backgroundColor");
+
         public UserSettingsForm()
         {
             InitializeComponent();
@@ -88,9 +91,6 @@ namespace CheckListWindows.Forms
             settingsPanel = ColorsStyles.setPanelColors(settingsPanel, false);
             settingsPanelTitle = ColorsStyles.setPanelColors(settingsPanelTitle, true);
             subPanel = ColorsStyles.setPanelColors(subPanel, true);
-
-
-
         }
 
         private void setLabelColors(Label colorObject)
@@ -126,6 +126,11 @@ namespace CheckListWindows.Forms
             {
                 SaveConfigInterface.AddOrUpdateAppSettings("username", usernameTxtBox.Text);
                 SaveConfigInterface.AddOrUpdateAppSettings("password", passwordTxtBox.Text);
+                SaveConfigInterface.AddOrUpdateAppSettings("textColor", textColor);
+                SaveConfigInterface.AddOrUpdateAppSettings("backGroundColor", backgroundColor);
+
+                auxiliaryConfigs.isConfigChanged = true;
+
                 return executeLogin();
             }
             catch(Exception ex)
@@ -170,9 +175,31 @@ namespace CheckListWindows.Forms
             return false;
         }
 
+        private void txtColorBtn_Click(object sender, EventArgs e)
+        {
+            txtColorPicker.ShowDialog();
 
+            if (txtColorPicker.ShowDialog() == DialogResult.OK)
+            {
+                exampleTxtBox.ForeColor = txtColorPicker.Color;
+                textColor = ColorTranslator.ToHtml(txtColorPicker.Color);
+            }
+        }
 
+        private void backgroundColorBtn_Click(object sender, EventArgs e)
+        {
+            txtColorPicker.ShowDialog();
 
+            if (txtColorPicker.ShowDialog() == DialogResult.OK)
+            {
+                exampleTxtBox.BackColor = txtColorPicker.Color;
+                backgroundColor = ColorTranslator.ToHtml(txtColorPicker.Color);
+            }
+        }
 
+        private void exampleTxtBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

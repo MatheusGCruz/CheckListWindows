@@ -13,5 +13,7 @@ namespace CheckListWindows.models
 		public DateTime? endedAt { get; set; }
 		public int  isPermanent { get; set; }
 		public int  ownerId { get; set; }
+		public int? checkedBy { get; set; }
+		public DateTime? checkedAt { get; set; }
 	}
 }

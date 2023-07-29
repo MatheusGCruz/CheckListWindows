@@ -28,6 +28,7 @@ namespace CheckListWindows
         private bool isFormPined = false;
         private int activeListId = 0;
 
+        public bool isConfigChanged = false;
         private Point _mouseLoc;
 
         private static String shadownTimerValue = ConfigurationManager.AppSettings.Get("shadownTimerValue");
@@ -67,7 +68,6 @@ namespace CheckListWindows
             titlePanel.BackColor = auxiliaryConfigs.getDarkerBackgroundColor();
             titlePanel.ForeColor = auxiliaryConfigs.getLighterTextColor();
             titlePanel.BorderStyle = BorderStyle.FixedSingle;
-
         }
 
         private void setBasicUserConfigs()
@@ -80,11 +80,7 @@ namespace CheckListWindows
                 }
                 connStatus();
             }
-
             setTimers();
-
-
-
         }
 
         private void setTimers()
@@ -539,6 +535,12 @@ namespace CheckListWindows
 
         private void listRefreshTimer_Tick(object sender, EventArgs e)
         {
+            if (auxiliaryConfigs.isConfigChanged)
+            {
+                auxiliaryConfigs.isConfigChanged = false;
+                setBasicConfigs();
+                setBasicUserConfigs();
+            }
             if(!isCreatingNewItem && !isCreatingNewList)
             {
                 fillItens(false);
