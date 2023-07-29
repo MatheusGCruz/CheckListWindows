@@ -169,10 +169,6 @@ namespace CheckListWindows.Forms
 
                 return executeLogin();
             }
-
-
-
-            return false;
         }
 
         private void txtColorBtn_Click(object sender, EventArgs e)

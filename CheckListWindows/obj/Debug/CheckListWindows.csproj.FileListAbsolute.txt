@@ -13,3 +13,4 @@ C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\CheckListWind
 C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\Newtonsoft.Json.dll
 C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Debug\Newtonsoft.Json.xml
 C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.csproj.CopyComplete
+C:\Projects\checklists\CheckListWindows\CheckListWindows\obj\Debug\CheckListWindows.Forms.ConfirmCreationForm.resources

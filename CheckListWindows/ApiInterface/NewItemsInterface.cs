@@ -14,9 +14,7 @@ namespace CheckListWindows.ApiInterface
             ChecklistNameDto newChecklistName = new ChecklistNameDto();
             newChecklistName.name = "Add new list";
             newChecklistName.id = 0;
-
             showChecklistName.checklist = newChecklistName;
-
 
             return showChecklistName;
         }
@@ -27,9 +25,7 @@ namespace CheckListWindows.ApiInterface
             ChecklistItemDto newChecklistItem = new ChecklistItemDto();
             newChecklistItem.name = "Add new item";
             newChecklistItem.id = 0;
-
             showChecklistItem.checkItem = newChecklistItem;
-
 
             return showChecklistItem;
         }

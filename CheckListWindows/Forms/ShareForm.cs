@@ -46,7 +46,7 @@ namespace CheckListWindows.Forms
 
             foreach(ShowChecklistNameDto showChecklistName in mineChecklists)
             {
-                selectorComboBox.Items.Add(showChecklistName.checklist.name);
+                listCombo.Items.Add(showChecklistName.checklist.name);
             }            
         }
 
@@ -56,7 +56,7 @@ namespace CheckListWindows.Forms
             this.FormBorderStyle = FormBorderStyle.None;
             this.BackColor = auxiliaryConfigs.getBackGroundColor();
             this.ForeColor = auxiliaryConfigs.getTextColorConfig();
-            selectorComboBox = ColorsStyles.setComboBoxColors(selectorComboBox);
+            listCombo = ColorsStyles.setComboBoxColors(listCombo);
 
             sharePanelTitle = ColorsStyles.setPanelColors(sharePanelTitle, false);
             subPanel = ColorsStyles.setPanelColors(subPanel, true);
@@ -77,6 +77,19 @@ namespace CheckListWindows.Forms
                     int dy = e.Location.Y - _mouseLoc.Y;
                     this.Location = new Point(this.Location.X + dx, this.Location.Y + dy);
                 }
+        }
+
+        private void addPictBox_Click(object sender, EventArgs e)
+        {
+            if (listRadio.Checked)
+            {
+                shareLbl.Text = "Give the list a name";
+            }
+            else if (itemRadio.Checked)
+            {
+                shareLbl.Text = "Add an item to the list";
+            }
+
         }
     }
 }

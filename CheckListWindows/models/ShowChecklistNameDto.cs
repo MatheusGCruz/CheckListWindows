@@ -11,6 +11,7 @@ namespace CheckListWindows.Models
         public ChecklistNameDto checklist {get; set;}
         public int numItens { get; set; }
         public int chkItens { get; set; }
+        public bool isCompleted { get; set; }
 
     }
 }

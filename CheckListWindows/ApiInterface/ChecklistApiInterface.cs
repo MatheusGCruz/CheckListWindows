@@ -22,6 +22,8 @@ namespace CheckListWindows.ApiInterface
 
         public static List<ShowChecklistItemDto> getListItens(int listId)
         {
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
+
             List<ShowChecklistItemDto> showChecklistItems = new List<ShowChecklistItemDto>();
             List<ShowChecklistNameDto> showListNames = new List<ShowChecklistNameDto>();
             List<ChecklistItemDto> checklistItems = new List<ChecklistItemDto>();
@@ -57,6 +59,8 @@ namespace CheckListWindows.ApiInterface
 
         public static List<CheckedItemDto> GetCheckedItems(int listId)
         {
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
+
             List<CheckedItemDto> listItens = new List<CheckedItemDto>();
             for (int i = 1; i <= 5; i++)
             {
@@ -73,35 +77,48 @@ namespace CheckListWindows.ApiInterface
 
         public static List<ShowChecklistNameDto> getMineListNames()
         {
-            List<ShowChecklistNameDto> listNames = new List<ShowChecklistNameDto>();
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
+            List<ShowChecklistNameDto> showListNames = new List<ShowChecklistNameDto>();
+            List<ChecklistNameDto> listNames = new List<ChecklistNameDto>();
 
-            for (int i = 1; i <= 5; i++)
+
+            String uri = config.checklistApiUrl + "/checklists/getOwnedCheckList";
+            client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add("token", checklistToken);
+
+            var task = Task.Run(() => client.GetAsync(uri));
+            var response = task.Result;
+
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                ShowChecklistNameDto mockShowList = new ShowChecklistNameDto();
-                ChecklistNameDto mockListName = new ChecklistNameDto();
-                mockListName.id = i;
-                mockListName.name = "List " + i.ToString();
+                var responseList = response.Content.ReadAsStringAsync().Result;
+                try
+                {
+                    listNames = JsonConvert.DeserializeObject<List<ChecklistNameDto>>(responseList);
+                    showListNames = createListNames(listNames);
+                }
+                catch (Exception ex)
+                {
 
-                mockShowList.chkItens = 1;
-                mockShowList.numItens = 5;
-                mockShowList.isActive = false;
-                mockShowList.checklist = mockListName;
+                }
 
-                listNames.Add(mockShowList);
+                return showListNames;
             }
 
-            return listNames;
+            return showListNames;
         }
 
 
 
         public static List<ShowChecklistNameDto> getListNames()
         {
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
             List<ShowChecklistNameDto> showListNames = new List<ShowChecklistNameDto>();
             List<ChecklistNameDto> listNames = new List<ChecklistNameDto>();
 
 
-            String uri = config.checklistApiUrl + "/checklists";
+            String uri = config.checklistApiUrl + "/checklists/getCheckList";
             client = new HttpClient();
 
             client.DefaultRequestHeaders.Add("token", checklistToken);
@@ -130,6 +147,7 @@ namespace CheckListWindows.ApiInterface
 
         public static List<ShowChecklistNameDto> getMockListNames()
         {
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
             List<ShowChecklistNameDto> listNames = new List<ShowChecklistNameDto>();
 
 
@@ -188,6 +206,7 @@ namespace CheckListWindows.ApiInterface
 
         public static bool createNewList(ChecklistNameDto newChecklist)
         {
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
             List<ShowChecklistNameDto> listNames = new List<ShowChecklistNameDto>();
 
             String uri = config.checklistApiUrl + "/checklists/addList";
@@ -213,7 +232,7 @@ namespace CheckListWindows.ApiInterface
         public static bool createNewItem(CheckedItemDto newItem)
         {
             // Corrigir
-
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
             String uri = config.checklistApiUrl + "/checklists/addItem";
 
             client.DefaultRequestHeaders.Remove("token");
@@ -249,6 +268,30 @@ namespace CheckListWindows.ApiInterface
                 showChecklistItems.Add(showChecklistItem);
             }
             return showChecklistItems;
+        }
+
+        public static bool checkItem(CheckedItemDto newItem)
+        {
+            // Corrigir
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
+            String uri = config.checklistApiUrl + "/checkItem";
+
+            client.DefaultRequestHeaders.Remove("token");
+            client.DefaultRequestHeaders.Add("token", checklistToken);
+
+            var jsonContent = JsonConvert.SerializeObject(newItem);
+            var contentString = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var task = Task.Run(() => client.PostAsync(uri, contentString));
+            var response = task.Result;
+
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                return true;
+            }
+
+            return false;
         }
 
 

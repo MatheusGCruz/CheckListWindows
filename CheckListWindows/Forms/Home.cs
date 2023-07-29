@@ -115,7 +115,7 @@ namespace CheckListWindows
                 LB.Size = new Size(500, 13);
                 LB.Text = TextEditions.getListText(list);
                 LB.Click += new EventHandler(listClick); //assign click handler
-                LB.Font = FontsEdits.listChange(LB.Font, list.isActive, list.checklist.id);
+                LB.Font = FontsEdits.listChange(LB.Font, list.isActive, list.checklist.id, list.isCompleted);
                 listItensPanel.Controls.Add(LB);
             }
         }
@@ -130,6 +130,7 @@ namespace CheckListWindows
                 LB.Location = new Point(pointX, (20 * pointY) + 25);
                 LB.Size = new Size(500, 13);
                 LB.Text = TextEditions.getItemText(item);
+                LB.Font = FontsEdits.itemChange(LB.Font, item.checkItem.id, (item.checkItem.checkedBy != null));
                 LB.Click += new EventHandler(listItemClick); //assign click handler
                 listItensPanel.Controls.Add(LB);
             }
@@ -137,6 +138,7 @@ namespace CheckListWindows
 
         private void refreshCache()
         {
+            refreshShow(true);
             shadowListNames = new List<ShowChecklistNameDto>();
             shadowAllItemsList = new List<ShowChecklistItemDto>();
 
@@ -155,19 +157,30 @@ namespace CheckListWindows
             foreach (ShowChecklistNameDto listName in shadowListNames)
             {
                 int itensQuantity = 0;
+                int checkedItens = 0;
                 foreach(ShowChecklistItemDto showChecklistItemDto in shadowAllItemsList)
                 {
                     if(showChecklistItemDto.checkItem.checklistId == listName.checklist.id)
                     {
                         itensQuantity++;
+                        if (showChecklistItemDto.checkItem.checkedBy != null)
+                        {
+                            checkedItens++;
+                        }
                     }
                 }
                 listName.numItens = itensQuantity;
-                listName.chkItens = itensQuantity - 1;
+                listName.chkItens = checkedItens;
+
+                if(itensQuantity > 0 && itensQuantity == checkedItens)
+                {
+                    listName.isCompleted = true;
+                }
             }
 
 
             applyShadows();
+            refreshShow(false);
         }
 
         private void applyShadows()
@@ -197,11 +210,15 @@ namespace CheckListWindows
             allItemsList.AddRange(shadowAllItemsList);
         }
 
-
+        private void refreshShow(bool isRefreshing)
+        {
+            refreshPictBox.Visible = isRefreshing;
+        }
 
 
         protected void listClick(object sender, EventArgs e)
         {
+            refreshShow(true);
             Label lbl = sender as Label;
             if (lbl != null)
             {
@@ -231,10 +248,12 @@ namespace CheckListWindows
                 
                 fillItens(false);
             }
+            refreshShow(false);
         }
 
         protected void listItemClick(object sender, EventArgs e)
         {
+            refreshShow(true);
             Label lbl = sender as Label;
             if (lbl != null)
             {
@@ -257,6 +276,7 @@ namespace CheckListWindows
                 }
                 fillItens(false);
             }
+            refreshShow(false);
         }
 
         protected void cancelItem(object sender, EventArgs e)
@@ -277,11 +297,13 @@ namespace CheckListWindows
             }
             activeItensByListId.Add(NewItemsInterface.addChecklistItemDto());
             return activeItensByListId;
-
         }
+
+
 
         private void fillItens(bool refreshListNames)
         {
+            refreshShow(true);
             listItensPanel.Controls.Clear();
             pointY = 1;
             if (refreshListNames)
@@ -315,6 +337,7 @@ namespace CheckListWindows
             {
                 createNewListTextbox();
             }
+            refreshShow(false);
         }
 
         private void initiateImages()
@@ -333,10 +356,6 @@ namespace CheckListWindows
 
 
 
-        private void createType(String type)
-        {
-            int teste = 0;
-        }
 
         private void createNewListTextbox()
         {
@@ -506,20 +525,25 @@ namespace CheckListWindows
 
         private void createNewList(object sender, EventArgs e)
         {
+            refreshShow(true);
             ChecklistNameDto newList = new ChecklistNameDto();
             newList.name = ((TextBox)listItensPanel.Controls["createdList"]).Text; // createdList.Text;
             newList.isPermanent = 0;
 
-            if (ChecklistApiInterface.createNewList(newList))
-            {
-                fillItens(true);
-                closeAndRefresh();
-            }
+            ConfirmCreationForm confirmCreationForm = new ConfirmCreationForm();
+            confirmCreationForm.loadNewList(newList);
+            var dialogResult = confirmCreationForm.ShowDialog();
 
+            refreshCache();
+            closeAndRefresh();
+
+
+            refreshShow(false);
         }
 
         private void createNewItem(object sender, EventArgs e)
         {
+            refreshShow(true);
             CheckedItemDto newItem = new CheckedItemDto();
             newItem.name = ((TextBox)listItensPanel.Controls["createdItem"]).Text; // createdList.Text;
             newItem.isPermanent = 0;
@@ -530,6 +554,7 @@ namespace CheckListWindows
                 fillItens(true);
                 closeAndRefresh();
             }
+            refreshShow(false);
 
         }
 
@@ -551,6 +576,12 @@ namespace CheckListWindows
         private void shadowRefreshTimer_Tick(object sender, EventArgs e)
         {
             refreshCache();
+        }
+
+        private bool checkSelectedItem()
+        {
+
+            return false;
         }
     }
 

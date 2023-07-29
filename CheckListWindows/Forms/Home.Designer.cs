@@ -32,19 +32,21 @@ namespace CheckListWindows
             this.components = new System.ComponentModel.Container();
             this.listItensPanel = new System.Windows.Forms.Panel();
             this.titlePanel = new System.Windows.Forms.Panel();
-            this.connPictBox = new System.Windows.Forms.PictureBox();
-            this.pinPictBox = new System.Windows.Forms.PictureBox();
             this.subPanel = new System.Windows.Forms.Panel();
-            this.sharePictBox = new System.Windows.Forms.PictureBox();
-            this.settingsBtn = new System.Windows.Forms.PictureBox();
             this.shadowRefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.listRefreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.sharePictBox = new System.Windows.Forms.PictureBox();
+            this.settingsBtn = new System.Windows.Forms.PictureBox();
+            this.refreshPictBox = new System.Windows.Forms.PictureBox();
+            this.connPictBox = new System.Windows.Forms.PictureBox();
+            this.pinPictBox = new System.Windows.Forms.PictureBox();
             this.titlePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.connPictBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pinPictBox)).BeginInit();
             this.subPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sharePictBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshPictBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.connPictBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pinPictBox)).BeginInit();
             this.SuspendLayout();
             // 
             // listItensPanel
@@ -58,6 +60,7 @@ namespace CheckListWindows
             // 
             // titlePanel
             // 
+            this.titlePanel.Controls.Add(this.refreshPictBox);
             this.titlePanel.Controls.Add(this.connPictBox);
             this.titlePanel.Controls.Add(this.pinPictBox);
             this.titlePanel.Location = new System.Drawing.Point(13, 12);
@@ -66,6 +69,57 @@ namespace CheckListWindows
             this.titlePanel.TabIndex = 7;
             this.titlePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HomeMouseDown);
             this.titlePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HomeMouseMove);
+            // 
+            // subPanel
+            // 
+            this.subPanel.Controls.Add(this.sharePictBox);
+            this.subPanel.Controls.Add(this.settingsBtn);
+            this.subPanel.Location = new System.Drawing.Point(12, 569);
+            this.subPanel.Name = "subPanel";
+            this.subPanel.Size = new System.Drawing.Size(302, 42);
+            this.subPanel.TabIndex = 8;
+            // 
+            // shadowRefreshTimer
+            // 
+            this.shadowRefreshTimer.Tick += new System.EventHandler(this.shadowRefreshTimer_Tick);
+            // 
+            // listRefreshTimer
+            // 
+            this.listRefreshTimer.Tick += new System.EventHandler(this.listRefreshTimer_Tick);
+            // 
+            // sharePictBox
+            // 
+            this.sharePictBox.BackgroundImage = global::CheckListWindows.Properties.Resources.share;
+            this.sharePictBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.sharePictBox.Location = new System.Drawing.Point(0, 4);
+            this.sharePictBox.Name = "sharePictBox";
+            this.sharePictBox.Size = new System.Drawing.Size(66, 38);
+            this.sharePictBox.TabIndex = 1;
+            this.sharePictBox.TabStop = false;
+            this.sharePictBox.Click += new System.EventHandler(this.shareClick);
+            // 
+            // settingsBtn
+            // 
+            this.settingsBtn.BackgroundImage = global::CheckListWindows.Properties.Resources.wrench;
+            this.settingsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.settingsBtn.Location = new System.Drawing.Point(254, 0);
+            this.settingsBtn.Name = "settingsBtn";
+            this.settingsBtn.Size = new System.Drawing.Size(49, 42);
+            this.settingsBtn.TabIndex = 0;
+            this.settingsBtn.TabStop = false;
+            this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
+            // 
+            // refreshPictBox
+            // 
+            this.refreshPictBox.BackgroundImage = global::CheckListWindows.Properties.Resources.cycle;
+            this.refreshPictBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.refreshPictBox.Enabled = false;
+            this.refreshPictBox.Location = new System.Drawing.Point(72, 4);
+            this.refreshPictBox.Name = "refreshPictBox";
+            this.refreshPictBox.Size = new System.Drawing.Size(62, 43);
+            this.refreshPictBox.TabIndex = 8;
+            this.refreshPictBox.TabStop = false;
+            this.refreshPictBox.Visible = false;
             // 
             // connPictBox
             // 
@@ -90,45 +144,6 @@ namespace CheckListWindows
             this.pinPictBox.TabStop = false;
             this.pinPictBox.Click += new System.EventHandler(this.pinBtn_Click);
             // 
-            // subPanel
-            // 
-            this.subPanel.Controls.Add(this.sharePictBox);
-            this.subPanel.Controls.Add(this.settingsBtn);
-            this.subPanel.Location = new System.Drawing.Point(12, 569);
-            this.subPanel.Name = "subPanel";
-            this.subPanel.Size = new System.Drawing.Size(302, 42);
-            this.subPanel.TabIndex = 8;
-            // 
-            // sharePictBox
-            // 
-            this.sharePictBox.BackgroundImage = global::CheckListWindows.Properties.Resources.share;
-            this.sharePictBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.sharePictBox.Location = new System.Drawing.Point(0, 4);
-            this.sharePictBox.Name = "sharePictBox";
-            this.sharePictBox.Size = new System.Drawing.Size(66, 38);
-            this.sharePictBox.TabIndex = 1;
-            this.sharePictBox.TabStop = false;
-            this.sharePictBox.Click += new System.EventHandler(this.shareClick);
-            // 
-            // settingsBtn
-            // 
-            this.settingsBtn.BackgroundImage = global::CheckListWindows.Properties.Resources.wrench;
-            this.settingsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.settingsBtn.Location = new System.Drawing.Point(254, 0);
-            this.settingsBtn.Name = "settingsBtn";
-            this.settingsBtn.Size = new System.Drawing.Size(49, 42);
-            this.settingsBtn.TabIndex = 0;
-            this.settingsBtn.TabStop = false;
-            this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
-            // 
-            // shadowRefreshTimer
-            // 
-            this.shadowRefreshTimer.Tick += new System.EventHandler(this.shadowRefreshTimer_Tick);
-            // 
-            // listRefreshTimer
-            // 
-            this.listRefreshTimer.Tick += new System.EventHandler(this.listRefreshTimer_Tick);
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -144,11 +159,12 @@ namespace CheckListWindows
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HomeMouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HomeMouseMove);
             this.titlePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.connPictBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pinPictBox)).EndInit();
             this.subPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sharePictBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshPictBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.connPictBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pinPictBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,6 +180,7 @@ namespace CheckListWindows
         private System.Windows.Forms.PictureBox sharePictBox;
         private System.Windows.Forms.Timer shadowRefreshTimer;
         private System.Windows.Forms.Timer listRefreshTimer;
+        private System.Windows.Forms.PictureBox refreshPictBox;
     }
 }
 

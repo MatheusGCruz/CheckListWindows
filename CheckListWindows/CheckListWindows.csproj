@@ -58,6 +58,12 @@
     <Compile Include="Auxiliary\TextEditions.cs" />
     <Compile Include="Configs\auxiliaryConfigs.cs" />
     <Compile Include="Configs\config.cs" />
+    <Compile Include="Forms\ConfirmCreationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConfirmCreationForm.Designer.cs">
+      <DependentUpon>ConfirmCreationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     <Compile Include="Models\UserInviteDto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\ConfirmCreationForm.resx">
+      <DependentUpon>ConfirmCreationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +127,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\trash.png" />
     <None Include="Resources\cancel.png" />
     <None Include="Resources\confirm.png" />
     <None Include="Resources\share.png" />
@@ -126,6 +136,8 @@
     <None Include="Resources\wifi-blue.png" />
     <None Include="Resources\pin-red.png" />
     <None Include="Resources\pin-white.png" />
+    <None Include="Resources\cycle.png" />
+    <None Include="Resources\add.png" />
     <Content Include="Resources\post-it.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
