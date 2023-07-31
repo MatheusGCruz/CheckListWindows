@@ -32,6 +32,28 @@ namespace CheckListWindows.Auxiliary
             return new Font(font, FontStyle.Italic | FontStyle.Strikeout);
         }
 
+        private static Font resetFont(Font font)
+        {
+            return new Font(font, FontStyle.Regular);
+        }
+        private static Font setItalic(Font font)
+        {
+            return new Font(font, FontStyle.Italic);
+        }
+        private static Font setBold(Font font)
+        {
+            return new Font(font, FontStyle.Bold);
+        }
+        private static Font setStrikeout(Font font)
+        {
+            return new Font(font, FontStyle.Strikeout);
+        }
+        private static Font setUnderscore(Font font)
+        {
+            return new Font(font, FontStyle.Underline);
+        }
+
+
 
 
         public static Font listChange(Font font, bool isActive, int listId, bool isCompleted)
@@ -51,17 +73,22 @@ namespace CheckListWindows.Auxiliary
             return simpleFont(font);
         }
 
-        public static Font itemChange(Font font, int itemId, bool isChecked)
+        public static Font itemChange(Font font, int itemId, bool isChecked, bool isActiveItem)
         {
+            font = resetFont(font);
             if (itemId == 0)
             {
-                return newItemFont(font);
+                return font;
+            }
+            if (isActiveItem)
+            {
+                font = setBold(font);
             }
             if (isChecked)
             {
-                return strikedItalic(font);
+                font = setStrikeout(font);
             }
-            return simpleFont(font);
+            return font;
         }
 
 

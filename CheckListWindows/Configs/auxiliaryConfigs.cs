@@ -9,6 +9,8 @@ namespace CheckListWindows.Configs
     class auxiliaryConfigs
     {
         public static bool isConfigChanged { get; set; }
+        public static String shadownTimerValue { get; set; } //= ConfigurationManager.AppSettings.Get("shadownTimerValue");
+        public static String refreshTimerValue { get; set; } //= ConfigurationManager.AppSettings.Get("refreshTimerValue");
 
         public static Color getBackGroundColor()
         {

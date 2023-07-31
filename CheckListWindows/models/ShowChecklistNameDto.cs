@@ -12,6 +12,7 @@ namespace CheckListWindows.Models
         public int numItens { get; set; }
         public int chkItens { get; set; }
         public bool isCompleted { get; set; }
+        public bool isOwned { get; set; }
 
     }
 }

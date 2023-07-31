@@ -32,21 +32,27 @@ namespace CheckListWindows
             this.components = new System.ComponentModel.Container();
             this.listItensPanel = new System.Windows.Forms.Panel();
             this.titlePanel = new System.Windows.Forms.Panel();
-            this.subPanel = new System.Windows.Forms.Panel();
-            this.shadowRefreshTimer = new System.Windows.Forms.Timer(this.components);
-            this.listRefreshTimer = new System.Windows.Forms.Timer(this.components);
-            this.sharePictBox = new System.Windows.Forms.PictureBox();
-            this.settingsBtn = new System.Windows.Forms.PictureBox();
             this.refreshPictBox = new System.Windows.Forms.PictureBox();
             this.connPictBox = new System.Windows.Forms.PictureBox();
             this.pinPictBox = new System.Windows.Forms.PictureBox();
+            this.subPanel = new System.Windows.Forms.Panel();
+            this.confirmPicBox = new System.Windows.Forms.PictureBox();
+            this.cancelPicBox = new System.Windows.Forms.PictureBox();
+            this.trashPicBox = new System.Windows.Forms.PictureBox();
+            this.sharePictBox = new System.Windows.Forms.PictureBox();
+            this.settingsBtn = new System.Windows.Forms.PictureBox();
+            this.shadowRefreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.listRefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.titlePanel.SuspendLayout();
-            this.subPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sharePictBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshPictBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.connPictBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pinPictBox)).BeginInit();
+            this.subPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.confirmPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cancelPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trashPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sharePictBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // listItensPanel
@@ -69,45 +75,6 @@ namespace CheckListWindows
             this.titlePanel.TabIndex = 7;
             this.titlePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HomeMouseDown);
             this.titlePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HomeMouseMove);
-            // 
-            // subPanel
-            // 
-            this.subPanel.Controls.Add(this.sharePictBox);
-            this.subPanel.Controls.Add(this.settingsBtn);
-            this.subPanel.Location = new System.Drawing.Point(12, 569);
-            this.subPanel.Name = "subPanel";
-            this.subPanel.Size = new System.Drawing.Size(302, 42);
-            this.subPanel.TabIndex = 8;
-            // 
-            // shadowRefreshTimer
-            // 
-            this.shadowRefreshTimer.Tick += new System.EventHandler(this.shadowRefreshTimer_Tick);
-            // 
-            // listRefreshTimer
-            // 
-            this.listRefreshTimer.Tick += new System.EventHandler(this.listRefreshTimer_Tick);
-            // 
-            // sharePictBox
-            // 
-            this.sharePictBox.BackgroundImage = global::CheckListWindows.Properties.Resources.share;
-            this.sharePictBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.sharePictBox.Location = new System.Drawing.Point(0, 4);
-            this.sharePictBox.Name = "sharePictBox";
-            this.sharePictBox.Size = new System.Drawing.Size(66, 38);
-            this.sharePictBox.TabIndex = 1;
-            this.sharePictBox.TabStop = false;
-            this.sharePictBox.Click += new System.EventHandler(this.shareClick);
-            // 
-            // settingsBtn
-            // 
-            this.settingsBtn.BackgroundImage = global::CheckListWindows.Properties.Resources.wrench;
-            this.settingsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.settingsBtn.Location = new System.Drawing.Point(254, 0);
-            this.settingsBtn.Name = "settingsBtn";
-            this.settingsBtn.Size = new System.Drawing.Size(49, 42);
-            this.settingsBtn.TabIndex = 0;
-            this.settingsBtn.TabStop = false;
-            this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             // 
             // refreshPictBox
             // 
@@ -144,6 +111,87 @@ namespace CheckListWindows
             this.pinPictBox.TabStop = false;
             this.pinPictBox.Click += new System.EventHandler(this.pinBtn_Click);
             // 
+            // subPanel
+            // 
+            this.subPanel.Controls.Add(this.confirmPicBox);
+            this.subPanel.Controls.Add(this.cancelPicBox);
+            this.subPanel.Controls.Add(this.trashPicBox);
+            this.subPanel.Controls.Add(this.sharePictBox);
+            this.subPanel.Controls.Add(this.settingsBtn);
+            this.subPanel.Location = new System.Drawing.Point(12, 569);
+            this.subPanel.Name = "subPanel";
+            this.subPanel.Size = new System.Drawing.Size(302, 42);
+            this.subPanel.TabIndex = 8;
+            // 
+            // confirmPicBox
+            // 
+            this.confirmPicBox.BackgroundImage = global::CheckListWindows.Properties.Resources.confirm;
+            this.confirmPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.confirmPicBox.Enabled = false;
+            this.confirmPicBox.Location = new System.Drawing.Point(190, 0);
+            this.confirmPicBox.Name = "confirmPicBox";
+            this.confirmPicBox.Size = new System.Drawing.Size(49, 42);
+            this.confirmPicBox.TabIndex = 4;
+            this.confirmPicBox.TabStop = false;
+            this.confirmPicBox.Visible = false;
+            this.confirmPicBox.Click += new System.EventHandler(this.confirmPicBox_Click);
+            // 
+            // cancelPicBox
+            // 
+            this.cancelPicBox.BackgroundImage = global::CheckListWindows.Properties.Resources.cancel;
+            this.cancelPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.cancelPicBox.Enabled = false;
+            this.cancelPicBox.Location = new System.Drawing.Point(133, 0);
+            this.cancelPicBox.Name = "cancelPicBox";
+            this.cancelPicBox.Size = new System.Drawing.Size(50, 42);
+            this.cancelPicBox.TabIndex = 3;
+            this.cancelPicBox.TabStop = false;
+            this.cancelPicBox.Visible = false;
+            this.cancelPicBox.Click += new System.EventHandler(this.cancelPicBox_Click);
+            // 
+            // trashPicBox
+            // 
+            this.trashPicBox.BackgroundImage = global::CheckListWindows.Properties.Resources.trash;
+            this.trashPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.trashPicBox.Enabled = false;
+            this.trashPicBox.Location = new System.Drawing.Point(72, 0);
+            this.trashPicBox.Name = "trashPicBox";
+            this.trashPicBox.Size = new System.Drawing.Size(55, 42);
+            this.trashPicBox.TabIndex = 2;
+            this.trashPicBox.TabStop = false;
+            this.trashPicBox.Visible = false;
+            this.trashPicBox.Click += new System.EventHandler(this.trashPicBox_Click);
+            // 
+            // sharePictBox
+            // 
+            this.sharePictBox.BackgroundImage = global::CheckListWindows.Properties.Resources.share;
+            this.sharePictBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.sharePictBox.Location = new System.Drawing.Point(0, 4);
+            this.sharePictBox.Name = "sharePictBox";
+            this.sharePictBox.Size = new System.Drawing.Size(66, 38);
+            this.sharePictBox.TabIndex = 1;
+            this.sharePictBox.TabStop = false;
+            this.sharePictBox.Click += new System.EventHandler(this.shareClick);
+            // 
+            // settingsBtn
+            // 
+            this.settingsBtn.BackgroundImage = global::CheckListWindows.Properties.Resources.wrench;
+            this.settingsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.settingsBtn.Location = new System.Drawing.Point(254, 0);
+            this.settingsBtn.Name = "settingsBtn";
+            this.settingsBtn.Size = new System.Drawing.Size(49, 42);
+            this.settingsBtn.TabIndex = 0;
+            this.settingsBtn.TabStop = false;
+            this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
+            // 
+            // shadowRefreshTimer
+            // 
+            this.shadowRefreshTimer.Tick += new System.EventHandler(this.shadowRefreshTimer_Tick);
+            // 
+            // listRefreshTimer
+            // 
+            this.listRefreshTimer.Tick += new System.EventHandler(this.listRefreshTimer_Tick);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,12 +207,15 @@ namespace CheckListWindows
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HomeMouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HomeMouseMove);
             this.titlePanel.ResumeLayout(false);
-            this.subPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.sharePictBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshPictBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.connPictBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pinPictBox)).EndInit();
+            this.subPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.confirmPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cancelPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trashPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sharePictBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsBtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,6 +232,9 @@ namespace CheckListWindows
         private System.Windows.Forms.Timer shadowRefreshTimer;
         private System.Windows.Forms.Timer listRefreshTimer;
         private System.Windows.Forms.PictureBox refreshPictBox;
+        private System.Windows.Forms.PictureBox confirmPicBox;
+        private System.Windows.Forms.PictureBox cancelPicBox;
+        private System.Windows.Forms.PictureBox trashPicBox;
     }
 }
 

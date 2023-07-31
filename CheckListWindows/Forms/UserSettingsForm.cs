@@ -21,6 +21,7 @@ namespace CheckListWindows.Forms
 
         private string textColor = ConfigurationManager.AppSettings.Get("textColor");
         private string backgroundColor = ConfigurationManager.AppSettings.Get("backgroundColor");
+        private int shadowRefresh = Int32.Parse(ConfigurationManager.AppSettings.Get("shadownTimerValue"));
 
         public UserSettingsForm()
         {
@@ -34,6 +35,8 @@ namespace CheckListWindows.Forms
             {
                 createNewUser();
             }
+
+            executeLogin();
         }
 
         private void registerBtn_Click(object sender, EventArgs e)
@@ -59,6 +62,7 @@ namespace CheckListWindows.Forms
         {
             if (saveConfigs())
             {
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
 
@@ -79,6 +83,7 @@ namespace CheckListWindows.Forms
             passwordLbl = ColorsStyles.setLabelColors(passwordLbl);
             confirmPassLbl = ColorsStyles.setLabelColors(confirmPassLbl);
             inviteLbl = ColorsStyles.setLabelColors(inviteLbl);
+            onlineRefreshLbl = ColorsStyles.setLabelColors(onlineRefreshLbl);
 
             usernameTxtBox = ColorsStyles.setTextBoxColors(usernameTxtBox);
             passwordTxtBox = ColorsStyles.setTextBoxColors(passwordTxtBox);
@@ -128,6 +133,8 @@ namespace CheckListWindows.Forms
                 SaveConfigInterface.AddOrUpdateAppSettings("password", passwordTxtBox.Text);
                 SaveConfigInterface.AddOrUpdateAppSettings("textColor", textColor);
                 SaveConfigInterface.AddOrUpdateAppSettings("backGroundColor", backgroundColor);
+                SaveConfigInterface.AddOrUpdateAppSettings("shadownTimerValue", shadowRefresh.ToString());
+                SaveConfigInterface.AddOrUpdateAppSettings("refreshTimerValue", (shadowRefresh/3).ToString());
 
                 auxiliaryConfigs.isConfigChanged = true;
 
@@ -135,7 +142,7 @@ namespace CheckListWindows.Forms
             }
             catch(Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
             return false;
         }
@@ -143,8 +150,7 @@ namespace CheckListWindows.Forms
         private bool executeLogin()
         {
             SaveConfigInterface.AddOrUpdateAppSettings("checklistToken", "NONE");
-            AuthApiInterface.getChecklistToken();
-            string teste = ConfigurationManager.AppSettings.Get("checklistToken");
+            returnMsgLbl.Text = AuthApiInterface.getChecklistToken();
             return !(ConfigurationManager.AppSettings.Get("checklistToken") == "NONE");
         }
 

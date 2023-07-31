@@ -1,6 +1,7 @@
 ﻿using CheckListWindows.ApiInterface;
 using CheckListWindows.Auxiliary;
 using CheckListWindows.Configs;
+using CheckListWindows.models;
 using CheckListWindows.Models;
 using System;
 using System.Collections.Generic;
@@ -15,39 +16,24 @@ namespace CheckListWindows.Forms
     public partial class ShareForm : Form
     {
         private Point _mouseLoc;
+        private ChecklistNameDto newList = new ChecklistNameDto();
+
+
+        internal void loadNewList(ChecklistNameDto sendedList)
+        {
+            newList = sendedList;
+            String pinCode = ChecklistApiInterface.generatePinCode(newList);
+            if(pinCode != "PinCode Error")
+            {
+                pinCodeValueLbl.Text = pinCode;
+            }
+        }
 
         public ShareForm()
         {
             InitializeComponent();
 
             initiateStyles();
-            fillSelectList();
-        }
-
-
-        private void checklistSelected(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cancelClick(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void shareClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fillSelectList()
-        {
-            List<ShowChecklistNameDto> mineChecklists = ChecklistApiInterface.getMineListNames();
-
-            foreach(ShowChecklistNameDto showChecklistName in mineChecklists)
-            {
-                listCombo.Items.Add(showChecklistName.checklist.name);
-            }            
         }
 
 
@@ -56,7 +42,6 @@ namespace CheckListWindows.Forms
             this.FormBorderStyle = FormBorderStyle.None;
             this.BackColor = auxiliaryConfigs.getBackGroundColor();
             this.ForeColor = auxiliaryConfigs.getTextColorConfig();
-            listCombo = ColorsStyles.setComboBoxColors(listCombo);
 
             sharePanelTitle = ColorsStyles.setPanelColors(sharePanelTitle, false);
             subPanel = ColorsStyles.setPanelColors(subPanel, true);
@@ -79,17 +64,14 @@ namespace CheckListWindows.Forms
                 }
         }
 
-        private void addPictBox_Click(object sender, EventArgs e)
+        private void confirmPicBox_Click(object sender, EventArgs e)
         {
-            if (listRadio.Checked)
-            {
-                shareLbl.Text = "Give the list a name";
-            }
-            else if (itemRadio.Checked)
-            {
-                shareLbl.Text = "Add an item to the list";
-            }
+            this.Close();
+        }
 
+        private void getPinCode()
+        {
+            
         }
     }
 }

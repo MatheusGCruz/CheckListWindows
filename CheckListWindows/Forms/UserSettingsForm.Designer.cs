@@ -43,26 +43,31 @@ namespace CheckListWindows.Forms
             this.userPanelTitle = new System.Windows.Forms.Panel();
             this.userPanelLbl = new System.Windows.Forms.Label();
             this.settingsPanel = new System.Windows.Forms.Panel();
+            this.examplePanel = new System.Windows.Forms.Panel();
+            this.exampleTxtBox = new System.Windows.Forms.TextBox();
+            this.backgroundColorBtn = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txtColorBtn = new System.Windows.Forms.Button();
             this.settingsPanelTitle = new System.Windows.Forms.Panel();
             this.settingsPanelLabel = new System.Windows.Forms.Label();
             this.subPanel = new System.Windows.Forms.Panel();
             this.msgLbl = new System.Windows.Forms.Label();
             this.cancelPictBox = new System.Windows.Forms.PictureBox();
             this.confirmPictBox = new System.Windows.Forms.PictureBox();
-            this.txtColorBtn = new System.Windows.Forms.Button();
             this.txtColorPicker = new System.Windows.Forms.ColorDialog();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.backgroundColorBtn = new System.Windows.Forms.Button();
-            this.exampleTxtBox = new System.Windows.Forms.TextBox();
-            this.examplePanel = new System.Windows.Forms.Panel();
+            this.onlineRefreshLbl = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.returnMsgLbl = new System.Windows.Forms.Label();
             this.userPanel.SuspendLayout();
             this.userPanelTitle.SuspendLayout();
             this.settingsPanel.SuspendLayout();
+            this.examplePanel.SuspendLayout();
             this.settingsPanelTitle.SuspendLayout();
             this.subPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cancelPictBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.confirmPictBox)).BeginInit();
-            this.examplePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // userPanel
@@ -206,6 +211,60 @@ namespace CheckListWindows.Forms
             this.settingsPanel.Size = new System.Drawing.Size(541, 307);
             this.settingsPanel.TabIndex = 1;
             // 
+            // examplePanel
+            // 
+            this.examplePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.examplePanel.Controls.Add(this.numericUpDown1);
+            this.examplePanel.Controls.Add(this.onlineRefreshLbl);
+            this.examplePanel.Controls.Add(this.exampleTxtBox);
+            this.examplePanel.Controls.Add(this.backgroundColorBtn);
+            this.examplePanel.Controls.Add(this.checkBox1);
+            this.examplePanel.Controls.Add(this.txtColorBtn);
+            this.examplePanel.Location = new System.Drawing.Point(7, 63);
+            this.examplePanel.Name = "examplePanel";
+            this.examplePanel.Size = new System.Drawing.Size(200, 230);
+            this.examplePanel.TabIndex = 5;
+            // 
+            // exampleTxtBox
+            // 
+            this.exampleTxtBox.Location = new System.Drawing.Point(3, 3);
+            this.exampleTxtBox.Multiline = true;
+            this.exampleTxtBox.Name = "exampleTxtBox";
+            this.exampleTxtBox.Size = new System.Drawing.Size(192, 42);
+            this.exampleTxtBox.TabIndex = 0;
+            this.exampleTxtBox.Text = "Text Example";
+            this.exampleTxtBox.TextChanged += new System.EventHandler(this.exampleTxtBox_TextChanged);
+            // 
+            // backgroundColorBtn
+            // 
+            this.backgroundColorBtn.Location = new System.Drawing.Point(3, 99);
+            this.backgroundColorBtn.Name = "backgroundColorBtn";
+            this.backgroundColorBtn.Size = new System.Drawing.Size(89, 23);
+            this.backgroundColorBtn.TabIndex = 4;
+            this.backgroundColorBtn.Text = "Background";
+            this.backgroundColorBtn.UseVisualStyleBackColor = true;
+            this.backgroundColorBtn.Click += new System.EventHandler(this.backgroundColorBtn_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 52);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(79, 17);
+            this.checkBox1.TabIndex = 3;
+            this.checkBox1.Text = "Dark Mode";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // txtColorBtn
+            // 
+            this.txtColorBtn.Location = new System.Drawing.Point(3, 75);
+            this.txtColorBtn.Name = "txtColorBtn";
+            this.txtColorBtn.Size = new System.Drawing.Size(89, 23);
+            this.txtColorBtn.TabIndex = 1;
+            this.txtColorBtn.Text = "Text Color";
+            this.txtColorBtn.UseVisualStyleBackColor = true;
+            this.txtColorBtn.Click += new System.EventHandler(this.txtColorBtn_Click);
+            // 
             // settingsPanelTitle
             // 
             this.settingsPanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -228,6 +287,8 @@ namespace CheckListWindows.Forms
             // subPanel
             // 
             this.subPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.subPanel.Controls.Add(this.returnMsgLbl);
+            this.subPanel.Controls.Add(this.label1);
             this.subPanel.Controls.Add(this.msgLbl);
             this.subPanel.Controls.Add(this.cancelPictBox);
             this.subPanel.Controls.Add(this.confirmPictBox);
@@ -267,57 +328,38 @@ namespace CheckListWindows.Forms
             this.confirmPictBox.TabStop = false;
             this.confirmPictBox.Click += new System.EventHandler(this.confirmBtnClick);
             // 
-            // txtColorBtn
+            // onlineRefreshLbl
             // 
-            this.txtColorBtn.Location = new System.Drawing.Point(3, 75);
-            this.txtColorBtn.Name = "txtColorBtn";
-            this.txtColorBtn.Size = new System.Drawing.Size(89, 23);
-            this.txtColorBtn.TabIndex = 1;
-            this.txtColorBtn.Text = "Text Color";
-            this.txtColorBtn.UseVisualStyleBackColor = true;
-            this.txtColorBtn.Click += new System.EventHandler(this.txtColorBtn_Click);
+            this.onlineRefreshLbl.AutoSize = true;
+            this.onlineRefreshLbl.Location = new System.Drawing.Point(4, 147);
+            this.onlineRefreshLbl.Name = "onlineRefreshLbl";
+            this.onlineRefreshLbl.Size = new System.Drawing.Size(126, 13);
+            this.onlineRefreshLbl.TabIndex = 5;
+            this.onlineRefreshLbl.Text = "Refresh Period (seconds)";
             // 
-            // checkBox1
+            // numericUpDown1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 52);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(79, 17);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Dark Mode";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.numericUpDown1.Location = new System.Drawing.Point(7, 163);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 6;
             // 
-            // backgroundColorBtn
+            // label1
             // 
-            this.backgroundColorBtn.Location = new System.Drawing.Point(3, 99);
-            this.backgroundColorBtn.Name = "backgroundColorBtn";
-            this.backgroundColorBtn.Size = new System.Drawing.Size(89, 23);
-            this.backgroundColorBtn.TabIndex = 4;
-            this.backgroundColorBtn.Text = "Background";
-            this.backgroundColorBtn.UseVisualStyleBackColor = true;
-            this.backgroundColorBtn.Click += new System.EventHandler(this.backgroundColorBtn_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(21, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 24);
+            this.label1.TabIndex = 3;
             // 
-            // exampleTxtBox
+            // returnMsgLbl
             // 
-            this.exampleTxtBox.Location = new System.Drawing.Point(3, 3);
-            this.exampleTxtBox.Multiline = true;
-            this.exampleTxtBox.Name = "exampleTxtBox";
-            this.exampleTxtBox.Size = new System.Drawing.Size(192, 42);
-            this.exampleTxtBox.TabIndex = 0;
-            this.exampleTxtBox.Text = "Text Example";
-            this.exampleTxtBox.TextChanged += new System.EventHandler(this.exampleTxtBox_TextChanged);
-            // 
-            // examplePanel
-            // 
-            this.examplePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.examplePanel.Controls.Add(this.exampleTxtBox);
-            this.examplePanel.Controls.Add(this.backgroundColorBtn);
-            this.examplePanel.Controls.Add(this.checkBox1);
-            this.examplePanel.Controls.Add(this.txtColorBtn);
-            this.examplePanel.Location = new System.Drawing.Point(7, 63);
-            this.examplePanel.Name = "examplePanel";
-            this.examplePanel.Size = new System.Drawing.Size(200, 230);
-            this.examplePanel.TabIndex = 5;
+            this.returnMsgLbl.AutoSize = true;
+            this.returnMsgLbl.Location = new System.Drawing.Point(19, 19);
+            this.returnMsgLbl.Name = "returnMsgLbl";
+            this.returnMsgLbl.Size = new System.Drawing.Size(0, 13);
+            this.returnMsgLbl.TabIndex = 4;
             // 
             // UserSettingsForm
             // 
@@ -334,14 +376,15 @@ namespace CheckListWindows.Forms
             this.userPanelTitle.ResumeLayout(false);
             this.userPanelTitle.PerformLayout();
             this.settingsPanel.ResumeLayout(false);
+            this.examplePanel.ResumeLayout(false);
+            this.examplePanel.PerformLayout();
             this.settingsPanelTitle.ResumeLayout(false);
             this.settingsPanelTitle.PerformLayout();
             this.subPanel.ResumeLayout(false);
             this.subPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cancelPictBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.confirmPictBox)).EndInit();
-            this.examplePanel.ResumeLayout(false);
-            this.examplePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -374,5 +417,9 @@ namespace CheckListWindows.Forms
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox exampleTxtBox;
         private System.Windows.Forms.Panel examplePanel;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label onlineRefreshLbl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label returnMsgLbl;
     }
 }

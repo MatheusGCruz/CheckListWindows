@@ -100,7 +100,7 @@ namespace CheckListWindows.ApiInterface
                 }
                 catch (Exception ex)
                 {
-
+                    Console.WriteLine(ex.Message);
                 }
 
                 return showListNames;
@@ -136,13 +136,52 @@ namespace CheckListWindows.ApiInterface
                 }
                 catch(Exception ex)
                 {
-
+                    Console.WriteLine(ex.Message);
                 }
 
                 return showListNames;
             }
+            else
+            {
+                Console.WriteLine(response.StatusCode.ToString());
+            }
 
             return showListNames;
+        }
+
+        public static List<ChecklistNameDto> getOwnedLists()
+        {
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
+            List<ChecklistNameDto> listNames = new List<ChecklistNameDto>();
+
+
+            String uri = config.checklistApiUrl + "/checklists/getOwnedCheckList";
+            client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add("token", checklistToken);
+
+            var task = Task.Run(() => client.GetAsync(uri));
+            var response = task.Result;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var responseList = response.Content.ReadAsStringAsync().Result;
+                try
+                {
+                    listNames = JsonConvert.DeserializeObject<List<ChecklistNameDto>>(responseList);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                return listNames;
+            }
+            else
+            {
+                Console.WriteLine(response.StatusCode.ToString());
+            }
+            return listNames;
         }
 
         public static List<ShowChecklistNameDto> getMockListNames()
@@ -195,6 +234,7 @@ namespace CheckListWindows.ApiInterface
                 ShowChecklistNameDto showChecklistName = new ShowChecklistNameDto();
                 showChecklistName.checklist = list;
                 showChecklistName.isActive = false;
+                showChecklistName.isOwned = false;
                 showChecklistName.numItens = 0;
                 showChecklistName.chkItens = 0;
 
@@ -270,11 +310,10 @@ namespace CheckListWindows.ApiInterface
             return showChecklistItems;
         }
 
-        public static bool checkItem(CheckedItemDto newItem)
+        public static bool checkItem(ChecklistItemDto newItem)
         {
-            // Corrigir
             checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
-            String uri = config.checklistApiUrl + "/checkItem";
+            String uri = config.checklistApiUrl + "/checklists/checkItem";
 
             client.DefaultRequestHeaders.Remove("token");
             client.DefaultRequestHeaders.Add("token", checklistToken);
@@ -294,10 +333,80 @@ namespace CheckListWindows.ApiInterface
             return false;
         }
 
+        public static string generatePinCode(ChecklistNameDto shareChecklist)
+        {
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
+            String uri = config.checklistApiUrl + "/checklists/shareList";
+
+            client.DefaultRequestHeaders.Remove("token");
+            client.DefaultRequestHeaders.Add("token", checklistToken);
+
+            var jsonContent = JsonConvert.SerializeObject(shareChecklist);
+            var contentString = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var task = Task.Run(() => client.PostAsync(uri, contentString));
+            var response = task.Result;
+
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                var responseList = response.Content.ReadAsStringAsync().Result;
+                return responseList.ToString();
+            }
+
+            return "PinCode Error";
+        }
+
+        public static bool AddSharedList(string pinCode)
+        {
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
+
+
+            String uri = config.checklistApiUrl + "/checklists/addSharedList";
+            client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add("token", checklistToken);
+            client.DefaultRequestHeaders.Add("pinCode", pinCode);
+
+            var task = Task.Run(() => client.GetAsync(uri));
+            var response = task.Result;
+
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool RemoveList(ShowChecklistNameDto removedList)
+        {
+            if (!removedList.isOwned)
+            {
+                return false;
+            }
+            checklistToken = ConfigurationManager.AppSettings.Get("checklistToken");
+
+
+            String uri = config.checklistApiUrl + "/checklists/removeList";
+            client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add("token", checklistToken);
+            client.DefaultRequestHeaders.Add("listId", removedList.checklist.id.ToString());
+
+            var task = Task.Run(() => client.GetAsync(uri));
+            var response = task.Result;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
 
 
 
 
+            return false;
+        }
 
 
     }

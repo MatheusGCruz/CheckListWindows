@@ -21,6 +21,10 @@ namespace CheckListWindows.apiInterface
 
         public static String getChecklistToken()
         {
+
+            username = ConfigurationManager.AppSettings.Get("username");
+            password = ConfigurationManager.AppSettings.Get("password");
+
             String uri = config.authApiUrl + "/Auth/checkListToken";
             client = new HttpClient();
 
