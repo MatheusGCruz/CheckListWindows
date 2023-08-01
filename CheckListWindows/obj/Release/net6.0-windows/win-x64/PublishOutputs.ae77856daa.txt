@@ -1,0 +1,15 @@
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\CheckListWindows.exe
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\CheckListWindows.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\CheckListWindows.deps.json
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\CheckListWindows.runtimeconfig.json
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\CheckListWindows.dll.config
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\CheckListWindows.pdb
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\Microsoft.Win32.SystemEvents.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\Newtonsoft.Json.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\System.CodeDom.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\System.Configuration.ConfigurationManager.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\System.Drawing.Common.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\System.Management.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\System.Security.Cryptography.ProtectedData.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\System.Security.Permissions.dll
+C:\Projects\checklists\CheckListWindows\CheckListWindows\bin\Release\net6.0-windows\win-x64\app.publish\System.Windows.Extensions.dll
