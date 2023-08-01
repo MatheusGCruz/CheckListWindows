@@ -2,14 +2,10 @@
 using CheckListWindows.ApiInterface;
 using CheckListWindows.Auxiliary;
 using CheckListWindows.Configs;
-using CheckListWindows.models;
+using CheckListWindows.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace CheckListWindows.Forms
@@ -27,6 +23,7 @@ namespace CheckListWindows.Forms
         {
             InitializeComponent();
             initiateStyles();
+
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
@@ -73,10 +70,16 @@ namespace CheckListWindows.Forms
             this.Close();
         }
 
+        private void initiateValues()
+        {
+            refreshSelector.Value = shadowRefresh;
+        }
+
 
         private void initiateStyles()
         {
             this.FormBorderStyle = FormBorderStyle.None;
+            this.ShowInTaskbar = false;
             this.BackColor = auxiliaryConfigs.getBackGroundColor();
             this.ForeColor = auxiliaryConfigs.getTextColorConfig();
             usernameLbl = ColorsStyles.setLabelColors(usernameLbl);
@@ -89,6 +92,7 @@ namespace CheckListWindows.Forms
             passwordTxtBox = ColorsStyles.setTextBoxColors(passwordTxtBox);
             confirmTxtBox = ColorsStyles.setTextBoxColors(confirmTxtBox);
             inviteTxtBox = ColorsStyles.setTextBoxColors(inviteTxtBox);
+            exampleTxtBox = ColorsStyles.setTextBoxColors(exampleTxtBox);
 
             userPanel = ColorsStyles.setPanelColors(userPanel, false);
             userPanelTitle = ColorsStyles.setPanelColors(userPanelTitle, true);
@@ -202,6 +206,17 @@ namespace CheckListWindows.Forms
         private void exampleTxtBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void refreshSelector_ValueChanged(object sender, EventArgs e)
+        {
+            shadowRefresh = Int32.Parse(refreshSelector.Value.ToString());
+        }
+
+        private void shutdownPicBox_DoubleClick(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Abort;
+            this.Close();
         }
     }
 }

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="CheckListWindows.exe" version="1.0.0.1" publicKeyToken="973818838bcaa4a5" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="CheckListWindows" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="CheckListWindows.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CheckListWindows.exe" size="3420128">
+      <assemblyIdentity name="CheckListWindows" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Rd1IaKQwOYKElBk4t0VrvDanarjr05YGEDXiek1G9F4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="711952">
+      <assemblyIdentity name="Newtonsoft.Json" version="13.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4eJ697B+7t9c5xqSVfBCKBam/FhJpIPGcU4bRyBE+p0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="CheckListWindows.exe.config" size="508">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Yjo7bBLOQZ6RJcFnOnuGc35WuqhIXg32qp/vH+29EZE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\post-it.png" size="631842">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>TNJB76gXVlv2f4FJs5QLo/gylbBAZd3Zf6XYSL6qoRE=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=DESKTOP-MUU0II3\mathe" issuerKeyHash="2d2d15f902c706d8112474afb30fa65b88e3c7c9" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>I5T7M3udtBxfpfVdjtxRfx4Knlocj7HdvWRjMtxGXSs=</DigestValue></Reference></SignedInfo><SignatureValue>gQ6hJEIlszIj65xNRFISFJfAXy7WlFvvFQZvtr+wrdbwAQ/PFlY5/eEQ/aPjSE/WaGcdCk0QHojo5+Ke3i+IqRaqExCbF/MiB+x3pjPbfiK4FE4v/1egG3EQCvhyXfAkByLIIgjq9JJBezpvIOc10mhZFdBldPONZ8I6kAOyjxM=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>yrdcu87DSHDstWeBrnAjfCIlfmvaWl3yE3s5Hd6OCfoq4C9YPTqwNUvfKKIC1U2E/uhI5GYw3F3hsq9HOUqtfPcDrThXhZQs82ElIwBl4vf0Z7UgBgc0pLInf/1gHdq3GabF3cyf1k2Ni+Z8GcGZBSjU8FU4lZRBmZsSQDYqyVk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="2b5d46dc326364bdddb18f1c5a9e0a1e7f51dc8e5df5a55f1cb49d7b33fb9423" Description="" Url=""><as:assemblyIdentity name="CheckListWindows.exe" version="1.0.0.1" publicKeyToken="973818838bcaa4a5" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-MUU0II3\mathe</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>WmqDq/zDtXG68xXz3P1d0Jr8WXcQjb1YoUe6QeBZgj4=</DigestValue></Reference></SignedInfo><SignatureValue>i8TRaZs82/1qNbkn3+rHvREy4OfbR8lomIy2e3bCHYwNRUf78N5JXTe945kSylaxtDzj/AUUhpGe2+KknBAqjH+X+LLrhg9vmUnEHyXbnMfWih3XqPDDvUptXcOsB7PL7pQukwumzHSzUcQ9Z4AagDY0LoVFEG59akrJXMxAY14=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>yrdcu87DSHDstWeBrnAjfCIlfmvaWl3yE3s5Hd6OCfoq4C9YPTqwNUvfKKIC1U2E/uhI5GYw3F3hsq9HOUqtfPcDrThXhZQs82ElIwBl4vf0Z7UgBgc0pLInf/1gHdq3GabF3cyf1k2Ni+Z8GcGZBSjU8FU4lZRBmZsSQDYqyVk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQGAJlwnbAOJBLgmd0r+pphjANBgkqhkiG9w0BAQsFADA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtAE0AVQBVADAASQBJADMAXABtAGEAdABoAGUwHhcNMjMwODAxMTYxOTQzWhcNMjQwNzMxMjIxOTQzWjA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtAE0AVQBVADAASQBJADMAXABtAGEAdABoAGUwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMq3XLvOw0hw7LVnga5wI3wiJX5r2lpd8hN7OR3ejgn6KuAvWD06sDVL3yiiAtVNhP7oSORmMNxd4bKvRzlKrXz3A604V4WULPNhJSMAZeL39Ge1IAYHNKSyJ3/9YB3atxmmxd3Mn9ZNjYvmfBnBmQUo1PBVOJWUQZmbEkA2KslZAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAjIL1H02EMpRzuHRSRuK565zCmghzzsuiIxyPxghbbSVNkiN49iECggDvy9HmT8vspzxmBWQL0pv3WU5vLsJ3Lnxz2ihAeQcsD0pNCYtbhwqJEj+vUDgJwyTUjmsIxi9LGNX4+WAJRYHBmgiN4I2rVM1wHHqeNsWxwFinLk6rkIc=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

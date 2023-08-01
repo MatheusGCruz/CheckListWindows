@@ -1,5 +1,4 @@
-﻿using CheckListWindows.models;
-using CheckListWindows.Models;
+﻿using CheckListWindows.Models;
 
 using System;
 using System.Collections.Generic;

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+<startup><supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2"/></startup>
+  <appSettings>
+    <add key="username" value="" />
+    <add key="password" value="" />
+    <add key="checklistToken" value =""/>
+    <add key="textColor" value="Black"/>
+    <add key="backGroundColor" value ="AliceBlue"/>
+    <add key="shadownTimerValue" value ="30"/>
+    <add key="refreshTimerValue" value ="10"/>
+  </appSettings>
+</configuration>

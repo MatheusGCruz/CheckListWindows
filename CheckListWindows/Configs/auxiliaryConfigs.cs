@@ -9,17 +9,17 @@ namespace CheckListWindows.Configs
     class auxiliaryConfigs
     {
         public static bool isConfigChanged { get; set; }
-        public static String shadownTimerValue { get; set; } //= ConfigurationManager.AppSettings.Get("shadownTimerValue");
-        public static String refreshTimerValue { get; set; } //= ConfigurationManager.AppSettings.Get("refreshTimerValue");
+        public static String shadownTimerValue { get; set; } 
+        public static String refreshTimerValue { get; set; } 
 
         public static Color getBackGroundColor()
         {
-            return ColorTranslator.FromHtml(ConfigurationManager.AppSettings.Get("backgroundColor")); //Color.AliceBlue;
+            return ColorTranslator.FromHtml(ConfigurationManager.AppSettings.Get("backgroundColor")); 
         }
 
         public static Color getTextColorConfig()
         {
-            return ColorTranslator.FromHtml(ConfigurationManager.AppSettings.Get("textColor")); //Color.Black;
+            return ColorTranslator.FromHtml(ConfigurationManager.AppSettings.Get("textColor")); 
         }
 
 

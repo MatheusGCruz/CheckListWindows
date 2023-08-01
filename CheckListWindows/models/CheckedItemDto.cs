@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CheckListWindows.models
+namespace CheckListWindows.Models
 {
     class CheckedItemDto
     {

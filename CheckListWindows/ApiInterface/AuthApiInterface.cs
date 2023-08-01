@@ -1,8 +1,7 @@
 ﻿using CheckListWindows.ApiInterface;
-using CheckListWindows.models;
+using CheckListWindows.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Net.Http;

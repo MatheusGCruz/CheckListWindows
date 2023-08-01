@@ -30,6 +30,7 @@ namespace CheckListWindows
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.listItensPanel = new System.Windows.Forms.Panel();
             this.titlePanel = new System.Windows.Forms.Panel();
             this.refreshPictBox = new System.Windows.Forms.PictureBox();
@@ -43,6 +44,7 @@ namespace CheckListWindows
             this.settingsBtn = new System.Windows.Forms.PictureBox();
             this.shadowRefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.listRefreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.checklistIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.titlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.refreshPictBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.connPictBox)).BeginInit();
@@ -166,11 +168,13 @@ namespace CheckListWindows
             // 
             this.sharePictBox.BackgroundImage = global::CheckListWindows.Properties.Resources.share;
             this.sharePictBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.sharePictBox.Enabled = false;
             this.sharePictBox.Location = new System.Drawing.Point(0, 4);
             this.sharePictBox.Name = "sharePictBox";
             this.sharePictBox.Size = new System.Drawing.Size(66, 38);
             this.sharePictBox.TabIndex = 1;
             this.sharePictBox.TabStop = false;
+            this.sharePictBox.Visible = false;
             this.sharePictBox.Click += new System.EventHandler(this.shareClick);
             // 
             // settingsBtn
@@ -191,6 +195,15 @@ namespace CheckListWindows
             // listRefreshTimer
             // 
             this.listRefreshTimer.Tick += new System.EventHandler(this.listRefreshTimer_Tick);
+            // 
+            // checklistIcon
+            // 
+            this.checklistIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.checklistIcon.BalloonTipText = "Open Checklist App";
+            this.checklistIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("checklistIcon.Icon")));
+            this.checklistIcon.Text = "Check List App";
+            this.checklistIcon.Visible = true;
+            this.checklistIcon.DoubleClick += new System.EventHandler(this.checklistIcon_DoubleClick);
             // 
             // Home
             // 
@@ -235,6 +248,7 @@ namespace CheckListWindows
         private System.Windows.Forms.PictureBox confirmPicBox;
         private System.Windows.Forms.PictureBox cancelPicBox;
         private System.Windows.Forms.PictureBox trashPicBox;
+        private System.Windows.Forms.NotifyIcon checklistIcon;
     }
 }
 

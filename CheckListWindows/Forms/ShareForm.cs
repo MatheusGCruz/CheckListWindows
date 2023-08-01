@@ -1,14 +1,9 @@
 ﻿using CheckListWindows.ApiInterface;
 using CheckListWindows.Auxiliary;
 using CheckListWindows.Configs;
-using CheckListWindows.models;
 using CheckListWindows.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace CheckListWindows.Forms
@@ -40,6 +35,7 @@ namespace CheckListWindows.Forms
         private void initiateStyles()
         {
             this.FormBorderStyle = FormBorderStyle.None;
+            this.ShowInTaskbar = false;
             this.BackColor = auxiliaryConfigs.getBackGroundColor();
             this.ForeColor = auxiliaryConfigs.getTextColorConfig();
 
